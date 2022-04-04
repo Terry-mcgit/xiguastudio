@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)http://grompe.org.ru/static/wingdings_gaster.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="author" href="http://grompe.org.ru/">
+
+<meta property="og:image" content="http://grompe.org.ru/static/wingdings_icon.png">
+<title>Wingdings Gaster Translator</title>
+<style>
+* { box-sizing: border-box; font-family: sans-serif; }
+body { background: #000; color: #FFF; width: 100%; max-width: 1200px; margin: auto; }
+table { width: 100%; border-collapse: collapse; }
+.hlc textarea, .hl
+{
+  width: 100%;
+  -width: 400px;
+  height: 180px;
+  background: transparent;
+  border: none;
+  font: inherit;
+  border-radius: 0;
+  margin: 0; padding: 0;
+}
+.wd { font-family: "Symbola"; font-weight: normal; }
+.hlc
+{
+  position: relative; overflow: hidden;
+  font-size: 20pt; font-weight: bold;
+}
+.hl
+{
+  position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+  overflow-x: hidden; overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+  color: transparent;
+}
+.hlc mark { font: inherit; background: #777; color: #777; }
+.hlc textarea
+{
+  color: #FFF;
+  position: relative;
+  resize: none;
+}
+.b { border: 4px solid #FFF; padding: 8px; }
+a { color: #FF0; }
+</style>
+</head><body><table>
+  <tbody><tr>
+    <td>
+      <h2 class="wd">🕈✋☠☝👎✋☠☝💧</h2>
+    </td>
+    <td>
+      <h2>Text (<input id="caps" type="checkbox" checked="checked"> CAPS)</h2>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" class="b">
+      <div class="hlc wd">
+        <div class="hl" id="t1h">✠✋☝🕆✌💧✡💧❄☜💣</div>
+        <textarea id="t1" cols="40" rows="5" placeholder="☟☜☹☹⚐"></textarea>
+      </div>
+    </td>
+    <td width="50%" class="b">
+      <div class="hlc">
+        <div class="hl" id="t0h">XIGUASYSTEM</div>
+        <textarea id="t0" cols="40" rows="5" placeholder="HELLO"></textarea>
+      </div>
+    </td>
+  </tr>
+</tbody></table>
+<input id="f" type="image" src="./gg/wingdings_gaster2x.png" width="640" height="240">
+<b id="dbg">28</b>
+<script>
+var ID = function(e) {return document.getElementById(e)};
+var t0 = ID("t0"), t1 = ID("t1");
+var t0h = ID("t0h"), t1h = ID("t1h");
+var timer, timer2;
+var old_t0, old_t1;
+var map_wd2char =
+{
+  9999: "!",
+  9986: '"',
+  9985: "#",
+  128083: "$",
+  128365: "%",
+  128366: "&",
+  128367: "'",
+  9742: "(",
+  9990: ")",
+  128386: "*",
+  128387: "+",
+  128234: ",",
+  128235: "-",
+  128236: ".",
+  128237: "/",
+  128193: "0",
+  128194: "1",
+  128196: "2",
+  128463: "3",
+  128464: "4",
+  128452: "5",
+  8987: "6",
+  128430: "7",
+  128432: "8",
+  128434: "9",
+  128435: ":",
+  128436: ";",
+  128427: "<",
+  128428: "=",
+  9991: ">",
+  9997: "?",
+  128398: "@",
+  9996: "A",
+  128076: "B",
+  128077: "C",
+  128078: "D",
+  9756: "E",
+  9758: "F",
+  9757: "G",
+  9759: "H",
+  9995: "I",
+  9786: "J",
+  128528: "K",
+  9785: "L",
+  128163: "M",
+  9760: "N",
+  9872: "O",
+  127985: "P",
+  9992: "Q",
+  9788: "R",
+  128167: "S",
+  10052: "T",
+  128326: "U",
+  10014: "V",
+  128328: "W",
+  10016: "X",
+  10017: "Y",
+  9770: "Z",
+  9775: "[",
+  2384: "\\",
+  9784: "]",
+  9800: "^",
+  9801: "_",
+  9802: "`",
+  10048: "{",
+  10047: "|",
+  10077: "}",
+  10078: "~",
+  9803: "a",
+  9804: "b",
+  9805: "c",
+  9806: "d",
+  9807: "e",
+  9808: "f",
+  9809: "g",
+  9810: "h",
+  9811: "i",
+  38: "k",
+  9679: "l",
+  10061: "m",
+  9632: "n",
+  9633: "o",
+  10065: "q",
+  10066: "r",
+  11047: "s",
+  10731: "t",
+  9670: "u",
+  10070: "v",
+  11045: "w",
+  8999: "x",
+  9043: "y",
+  8984: "z",
+};
+var map_wd2char_ext =
+{
+  128383: "(",
+  128075: "I",
+  128073: "F",
+  128072: "E",
+  128128: "N",
+  9723: "o",
+  10064: 'r',
+  9674: 's',
+  9830: 't',
+  //128316: 'y', // Questionable
+  128311: 'u',
+  11035: "n",
+};
+var map_char2wd = {};
+for (var p in map_wd2char)
+{
+  if (!map_wd2char.hasOwnProperty(p)) continue;
+  map_char2wd[map_wd2char[p].charCodeAt(0)] = char2surrogate(p);
+  //map_char2wd[map_wd2char[p].toLowerCase().charCodeAt(0)] = char2surrogate(p);
+}
+function char2surrogate(w)
+{
+  if (w >= 0x10000 && w <= 0x10FFFF)
+  {
+    var c = String.fromCharCode(Math.floor((w - 0x10000) / 0x400) + 0xD800);
+    var c2 = String.fromCharCode(((w - 0x10000) % 0x400) + 0xDC00);
+    return c + c2;
+  } else {
+    return String.fromCharCode(w);
+  }
+}
+function char2wd(w)
+{
+  return map_char2wd[w] ? map_char2wd[w] : String.fromCharCode(w);
+}
+function wd2char(w, caps)
+{
+  var r;
+  if (map_wd2char_ext[w])
+  {
+    r = map_wd2char_ext[w];
+  } else {
+    r = map_wd2char[w] ? map_wd2char[w] : char2surrogate(w);
+  }
+  return caps ? r.toUpperCase() : r;
+}
+function text2wd(str, caps)
+{
+  var res = [];
+  if (caps) str = str.toUpperCase();
+  for (var i = 0; i < str.length; i++)
+  {
+    res.push(char2wd(str.charCodeAt(i)));
+  }
+  return res.join("");
+}
+function wd2text(str, caps)
+{
+  var res = [];
+  for (var i = 0; i < str.length; i++)
+  {
+    var c = str.charCodeAt(i);
+    var u;
+    if (c >= 0xDC00 && c <= 0xDFFF) continue;
+    if (c >= 0xD800 && c <= 0xDBFF)
+    {
+      var c2 = str.charCodeAt(i + 1);
+      u = 32;
+      if (c2 >= 0xDC00 && c2 <= 0xDFFF)
+      {
+        u = (c - 0xD800) * 0x400 + c2 + 0x2400;
+      }
+    } else {
+      u = str.charCodeAt(i);
+    }
+    res.push(wd2char(u, caps));
+  }
+  return res.join("");
+}
+function upd0()
+{
+  if (old_t0 == t0.value) return;
+  old_t0 = t0.value;
+  t1.value = text2wd(t0.value, ID("caps").checked);
+  t0h.textContent = t0.value;
+  ID("dbg").innerHTML = parseInt(ID("dbg").innerHTML, 10) + 1;
+}
+function upd1()
+{
+  if (old_t1 == t1.value) return;
+  old_t1 = t1.value;
+  t0.value = wd2text(t1.value, ID("caps").checked);
+  t1h.textContent = t1.value;
+  ID("dbg").innerHTML = parseInt(ID("dbg").innerHTML, 10) + 1;
+}
+function pre_upd0()
+{
+  clearTimeout(timer);
+  timer = setTimeout(upd0, 100);
+}
+function pre_upd1()
+{
+  clearTimeout(timer);
+  timer = setTimeout(upd1, 100);
+}
+["change", "keydown", "input"].forEach(function(e)
+{
+  t0.addEventListener(e, pre_upd0);
+  t1.addEventListener(e, pre_upd1);
+});
+var skip_sel_event;
+function reset_sel_skip()
+{
+  skip_sel_event = false;
+}
+function sel0()
+{
+  if (t0.selectionStart == t0.selectionEnd)
+  {
+    t1h.textContent = t1.value;
+  } else {
+    var l = text2wd(t0.value.substring(0, t0.selectionStart)).length;
+    var n = text2wd(t0.value.substring(t0.selectionStart, t0.selectionEnd)).length;
+    var part1 = t1.value.substring(0, l).replace(/</g, "&lt;");
+    var part2 = t1.value.substring(l, l + n).replace(/</g, "&lt;");
+    var part3 = t1.value.substring(l + n).replace(/</g, "&lt;");
+    t1h.innerHTML = part1 + "<mark>" + part2 + "</mark>" + part3;
+  }
+  scroll1();
+  setTimeout(reset_sel_skip, 0);
+}
+function sel1()
+{
+  if (t1.selectionStart == t1.selectionEnd)
+  {
+    t0h.textContent = t0.value;
+  } else {
+    var l = wd2text(t1.value.substring(0, t1.selectionStart)).length;
+    var n = wd2text(t1.value.substring(t1.selectionStart, t1.selectionEnd)).length;
+    var part1 = t0.value.substring(0, l).replace(/</g, "&lt;");
+    var part2 = t0.value.substring(l, l + n).replace(/</g, "&lt;");
+    var part3 = t0.value.substring(l + n).replace(/</g, "&lt;");
+    t0h.innerHTML = part1 + "<mark>" + part2 + "</mark>" + part3;
+  }
+  scroll0();
+  setTimeout(reset_sel_skip, 0);
+}
+function pre_sel0()
+{
+  if (skip_sel_event) return;
+  skip_sel_event = true;
+  clearTimeout(timer2);
+  timer2 = setTimeout(sel0, 100);
+}
+function pre_sel1()
+{
+  if (skip_sel_event) return;
+  skip_sel_event = true;
+  clearTimeout(timer2);
+  timer2 = setTimeout(sel1, 100);
+}
+["select", "mouseup", "keyup"].forEach(function(e)
+{
+  t0.addEventListener(e, pre_sel0);
+  t1.addEventListener(e, pre_sel1);
+});
+function scroll0()
+{
+  t0h.scrollTop = t0.scrollTop;
+}
+function scroll1()
+{
+  t1h.scrollTop = t1.scrollTop;
+}
+t0.addEventListener("scroll", scroll0);
+t1.addEventListener("scroll", scroll1);
+ID("f").addEventListener("click", function(e)
+{
+  var x = e.pageX - this.offsetLeft;
+  var y = e.pageY - this.offsetTop;
+  var slot = Math.floor(x / 40) + Math.floor(y / 40) * 16;
+  var ch = String.fromCharCode(32 + slot);
+  if (ID("caps").checked) ch = ch.toUpperCase();
+  t0.value += ch;
+  t0.scrollTop = 99999;
+  scroll0();
+  upd0();
+});
+</script>
+<p>
+  Unicode support may vary.
+  Install <a href="http://users.teilar.gr/~g1951d/">Symbola font by George Douros</a> for full support.
+</p>
+<p>
+  Made by <a href="http://grompe.org.ru/">Grom PE</a>
+  with <a href="http://www.alanwood.net/demos/wingdings.html">Wingdings mapping</a> help,
+  inspired by <a href="http://undertale.com/">Undertale</a>.
+</p>
+<div class="xl-chrome-ext-bar" id="xl_chrome_ext_{4DB361DE-01F7-4376-B494-639E489D19ED}" style="display: none;">
+      <div class="xl-chrome-ext-bar__logo"></div>
+
+      <a id="xl_chrome_ext_download" href="javascript:;" class="xl-chrome-ext-bar__option">下载视频</a>
+      <a id="xl_chrome_ext_close" href="javascript:;" class="xl-chrome-ext-bar__close"></a>
+    </div></body></html>
