@@ -5,8 +5,8 @@ Open source license:
 the source license can not be opened temporarily, but part of the source code license can be opened. 
 If you want part of the source code license, please contact QQ: memz-uac
 
-¿ªÔ´Ðí¿ÉÖ¤£¬Î÷¹Ï·þÎñ 5.20¡£
-ËüµÄ³ÌÐò²¿·ÖÊÇÓÉÒ×ÓïÑÔ³ÌÐò¡¢Çý¶¯³ÌÐò¡¢DLL¡¢¸üÐÂ³ÌÐòºÍ¶Ë¿Ú³ÌÐò×é³ÉµÄ³ÌÐò¡£ 
-Ëü¼¯³ÉÁËÏµÍ³µÄ´ó²¿·Ö¹¦ÄÜ£¬ÀýÈç¸üÐÂDLLÇý¶¯³ÌÐò¡£ 
-¿ªÔ´Ðí¿É£ºÔ´´úÂëÐí¿ÉÔÝÊ±²»¿ª·Å£¬µ«²¿·ÖÔ´´úÂëÐí¿É¿ÉÒÔ¿ª·Å¡£ 
-ÈçÐè²¿·ÖÔ´´úÂëÊÚÈ¨ÇëÁªÏµQQ£ºmemz-uac
+å¼€æºè®¸å¯è¯ï¼Œè¥¿ç“œæœåŠ¡ 5.20ã€‚
+å®ƒçš„ç¨‹åºéƒ¨åˆ†æ˜¯ç”±æ˜“è¯­è¨€ç¨‹åºã€é©±åŠ¨ç¨‹åºã€DLLã€æ›´æ–°ç¨‹åºå’Œç«¯å£ç¨‹åºç»„æˆçš„ç¨‹åºã€‚ 
+å®ƒé›†æˆäº†ç³»ç»Ÿçš„å¤§éƒ¨åˆ†åŠŸèƒ½ï¼Œä¾‹å¦‚æ›´æ–°DLLé©±åŠ¨ç¨‹åºã€‚ 
+å¼€æºè®¸å¯ï¼šæºä»£ç è®¸å¯æš‚æ—¶ä¸å¼€æ”¾ï¼Œä½†éƒ¨åˆ†æºä»£ç è®¸å¯å¯ä»¥å¼€æ”¾ã€‚ 
+å¦‚éœ€éƒ¨åˆ†æºä»£ç æŽˆæƒè¯·è”ç³»QQï¼šmemz-uac
