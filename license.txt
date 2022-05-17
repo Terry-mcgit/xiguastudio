@@ -1,0 +1,12 @@
+Open source license, XIGUA service 5.20. 
+Its program part is a program composed of easy language program,driver, DLL,updater and port program.
+It integrates most of the functions of the system, such as updating DLL driver. 
+Open source license: 
+the source license can not be opened temporarily, but part of the source code license can be opened. 
+If you want part of the source code license, please contact QQ: memz-uac
+
+开源许可证，西瓜服务 5.20。
+它的程序部分是由易语言程序、驱动程序、DLL、更新程序和端口程序组成的程序。 
+它集成了系统的大部分功能，例如更新DLL驱动程序。 
+开源许可：源代码许可暂时不开放，但部分源代码许可可以开放。 
+如需部分源代码授权请联系QQ：memz-uac
